@@ -1,0 +1,19 @@
+$main : #e7a65c;
+$hite: #eeeeee;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
+	
+}
+
+.main-container {
+	max-width: 1400px;
+	padding: 0 20px;
+	margin: 0 auto;
+	font-family: 'DM Sans', sans-serif;
+}
+
+@import "./Navbar.scss";
