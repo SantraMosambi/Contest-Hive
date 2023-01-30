@@ -1,0 +1,16 @@
+.contentholder {
+    background-color: rgb(36, 36, 36);
+    // box-shadow: -1px 0 19px 0 $main;
+
+
+    .box {
+        display: flex;
+        color: $hite;
+        padding: 20px;
+        justify-content: center;
+        transition: all 0.3s ease-in-out;
+
+
+    }
+
+}
