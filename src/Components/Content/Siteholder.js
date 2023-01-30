@@ -1,44 +1,38 @@
 import React from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-// import { useEffect } from "react";
-// import { useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Siteholder = () => {
-  // const APII = "https://kontests.net/api/v1/sites";
 
-  // const fetchApiData = async (url) => {
-  //   try {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [data, setData] = useState([]);
+  const APII = "https://kontests.net/api/v1/sites";
 
-  // useEffect(() => {
-  //   fetchApiData(APII);
-  // }, []);
+  const fetchApiData = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const datas = [
-    { id: 1, name: "All" },
-    { id: 2, name: "CodeChef" },
-    { id: 3, name: "CodeForces" },
-    { id: 4, name: "AtCoder" },
-    { id: 5, name: "HackerRank" },
-    { id: 6, name: "HackerEarth" },
-    { id: 7, name: "LeetCode" },
-    { id: 8, name: "Kick Start" },
-  ];
+  useEffect(() => {
+    fetchApiData(APII);
+  }, []);
+
+
 
   return (
+    
     <div className="contentholder">
       <div className="main-container">
         <div className="box">
           <Stack direction="row" spacing={3}>
-            {datas.map((item, id) => (
-              <Chip label={item.name} key={id}  />
+            {data.map((item, id) => (
+              <Chip label={item[0]} key={id}  />
             ))}
           </Stack>
         </div>
