@@ -1,10 +1,14 @@
-import React from 'react'
-import Siteholder from './Siteholder'
+import React from "react";
+import Siteholder from "./Siteholder";
+import Table from "./Table";
 
 const content = () => {
   return (
-    <div><Siteholder/></div>
-  )
-}
+    <div>
+      <Siteholder />
+      <Table />
+    </div>
+  );
+};
 
-export default content
+export default content;
