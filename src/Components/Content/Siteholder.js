@@ -32,7 +32,7 @@ const Siteholder = () => {
         <div className="box">
           <Stack direction="row" spacing={3}>
             {data.map((item, id) => (
-              <Chip label={item[0]} key={id}  />
+              <Chip label={item[0]} key={id} component="a" href="#basic-chip" clickable  />
             ))}
           </Stack>
         </div>
