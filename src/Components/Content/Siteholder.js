@@ -7,6 +7,7 @@ import { useState } from "react";
 const Siteholder = () => {
 
   const [data, setData] = useState([]);
+  const [site, setSite] = useState([]);
   const APII = "https://kontests.net/api/v1/sites";
 
   const fetchApiData = async (url) => {
@@ -14,6 +15,7 @@ const Siteholder = () => {
       const response = await fetch(url);
       const data = await response.json();
       setData(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +25,12 @@ const Siteholder = () => {
     fetchApiData(APII);
   }, []);
 
+  const handleClick = ( ) => {
+    // setSite(data[2]);
+    // console.log(item);
+    
 
+  };
 
   return (
     
@@ -32,7 +39,7 @@ const Siteholder = () => {
         <div className="box">
           <Stack direction="row" spacing={3}>
             {data.map((item, id) => (
-              <Chip label={item[0]} key={id} component="a" href="#basic-chip" clickable  />
+              <Chip label={item[0]} key={id}  component="a" clickable onClick={handleClick}  />
             ))}
           </Stack>
         </div>

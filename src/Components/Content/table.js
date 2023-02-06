@@ -2,6 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect } from "react";
 import { useState } from "react";
+import Link from "@mui/material/Link";
 
 const MainTable = () => {
   const [data, setData] = useState([]);
@@ -22,22 +23,36 @@ const MainTable = () => {
     fetchApiData(API);
   }, []);
 
-
-
   const rows = data.map((row) => ({
     name: row.name,
     sTime: new Date(row.start_time).toLocaleString(),
     eTime: new Date(row.end_time).toLocaleString(),
     duration: new Date(row.duration).getHours(),
+    site: row.url,
   }));
 
   const columns = [
     // { field: "id", headerName: "ID", width: 70},
-    { field: "name", headerName: "Contest Name", width: 530 },
+    {
+      field: "name",
+      headerName: "Contest Name",
+      width: 530,
+      renderCell: (cellValues) => {
+        return (
+          <Link
+            href={cellValues.row.site}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {cellValues.value}
+          </Link>
+        );
+      },
+    },
     { field: "sTime", headerName: "Start Time", width: 230 },
     { field: "eTime", headerName: "End Time", width: 230 },
     { field: "duration", headerName: "Duration", width: 130 },
-    { field: "site", headerName: "Site", width: 130 },
+    { field: "siteName", headerName: "Site Name", width: 130 },
   ];
 
   return (
