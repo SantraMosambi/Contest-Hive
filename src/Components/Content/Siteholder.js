@@ -7,7 +7,7 @@ import { useState } from "react";
 const Siteholder = () => {
 
   const [data, setData] = useState([]);
-  const [site, setSite] = useState([]);
+  
   const APII = "https://kontests.net/api/v1/sites";
 
   const fetchApiData = async (url) => {
@@ -26,8 +26,7 @@ const Siteholder = () => {
   }, []);
 
   const handleClick = ( ) => {
-    // setSite(data[2]);
-    // console.log(item);
+    console.log("clicked");
     
 
   };
