@@ -76,7 +76,7 @@ const MainTable = () => {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={11}
+            pageSize={10}
             rowsPerPageOptions={[5]}
             getRowId={() => generateRandom()}
           />
