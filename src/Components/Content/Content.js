@@ -1,6 +1,6 @@
 import React from "react";
 import Siteholder from "./Siteholder";
-import Table from "./table";
+import Table from "./Table";
 
 const content = () => {
   return (

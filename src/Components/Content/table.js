@@ -28,22 +28,60 @@ const MainTable = () => {
     const endTime = new Date(row.end_time);
     const durationInSeconds = (endTime - startTime) / 1000;
     const durationInDays = Math.floor(durationInSeconds / (3600 * 24));
-    const durationInHours = Math.floor((durationInSeconds % (3600 * 24)) / 3600);
+    const durationInHours = Math.floor(
+      (durationInSeconds % (3600 * 24)) / 3600
+    );
     const durationInMinutes = Math.floor((durationInSeconds % 3600) / 60);
-    const duration = durationInDays > 0 ? `${durationInDays} days and ${durationInHours.toString().padStart(2, '0')}:${durationInMinutes.toString().padStart(2, '0')} Hr` : `${durationInHours.toString().padStart(2, '0')}:${durationInMinutes.toString().padStart(2, '0')} Hr`;
-  
+    const duration =
+      durationInDays > 0
+        ? `${durationInDays} days and ${durationInHours
+            .toString()
+            .padStart(2, "0")}:${durationInMinutes
+            .toString()
+            .padStart(2, "0")} Hr`
+        : `${durationInHours.toString().padStart(2, "0")}:${durationInMinutes
+            .toString()
+            .padStart(2, "0")} Hr`;
+    const googleCalendarLink = `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${startTime
+      .toISOString()
+      .replace(/[-:.]/g, "")
+      .replace(/Z/g, "")}/${endTime
+      .toISOString()
+      .replace(/[-:.]/g, "")
+      .replace(/Z/g, "")}&text=${encodeURIComponent(
+      row.name
+    )}&location=${encodeURIComponent(row.url)}`;
+
     return {
       name: row.name,
       siteName: row.site,
-      sTime: startTime.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' ' + startTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-      eTime: endTime.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + ' ' + endTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+      sTime:
+        startTime.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }) +
+        " " +
+        startTime.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      eTime:
+        endTime.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }) +
+        " " +
+        endTime.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       duration: duration,
       site: row.url,
+      googleCalendarLink: googleCalendarLink,
     };
   });
-
-  
-  
 
   const columns = [
     // { field: "id", headerName: "ID", width: 70},
@@ -63,16 +101,33 @@ const MainTable = () => {
         );
       },
     },
-    { field: "sTime", headerName: "Start Time", width: 200 },
-    { field: "eTime", headerName: "End Time", width: 200 },
+    { field: "sTime", headerName: "Start Time", width: 180 },
+    { field: "eTime", headerName: "End Time", width: 180 },
     { field: "duration", headerName: "Duration", width: 190 },
     { field: "siteName", headerName: "Site Name", width: 130 },
+    {
+      field: "noti",
+      headerName: "Notification",
+      width: 130,
+      renderCell: (cellValues) => {
+        return (
+          <Link
+            href={cellValues.row.googleCalendarLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ marginLeft: "5px" }}
+          >
+            Notify Me
+          </Link>
+        );
+      },
+    },
   ];
 
   return (
     <div className="contentholdr">
       <div className="main-container">
-        <div style={{ height: 700, width: "100%" }}>
+        <div style={{ height: 700, width: "100%" , paddingTop:"50px"}}>
           <DataGrid
             rows={rows}
             columns={columns}
